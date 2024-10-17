@@ -10,6 +10,10 @@
         var platform = navigator.platform.toLowerCase();
         var aspectRatio = window.innerWidth / window.innerHeight;
 
+        console.log("User Agent: ", userAgent);
+        console.log("Plataforma: ", platform);
+        console.log("Relación de aspecto: ", aspectRatio);
+
         // Validación por User Agent (detecta dispositivos móviles)
         if (
           /android|avantgo|blackberry|iphone|ipad|ipod|palm|windows phone|xda|midp|mobile/i.test(
@@ -17,7 +21,7 @@
           )
         ) {
           document.write(
-            "<h1>El acceso desde dispositivos móviles no está permitido.</h1>"
+            "<h1>El acceso desde dispositivos móviles no está permitido1.</h1>"
           );
           return;
         }
@@ -29,15 +33,15 @@
           platform.includes("ipad")
         ) {
           document.write(
-            "<h1>El acceso desde dispositivos móviles no está permitido.</h1>"
+            "<h1>El acceso desde dispositivos móviles no está permitido2.</h1>"
           );
           return;
         }
 
         // Validación de resolución de pantalla (dispositivos móviles suelen tener resoluciones pequeñas)
-        if (window.innerWidth < 1024 || window.innerHeight < 768) {
+        if (window.innerWidth < 900 || window.innerHeight < 600) {
           document.write(
-            "<h1>El acceso desde dispositivos móviles no está permitido.</h1>"
+            "<h1>El acceso desde dispositivos móviles no está permitido3.</h1>"
           );
           return;
         }
@@ -45,7 +49,7 @@
         // Validación de Touch (detecta si el dispositivo tiene pantalla táctil)
         if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
           document.write(
-            "<h1>El acceso desde dispositivos móviles no está permitido.</h1>"
+            "<h1>El acceso desde dispositivos móviles no está permitido4.</h1>"
           );
           return;
         }
@@ -53,19 +57,36 @@
         // Validación del ratio de aspecto (mayoría de móviles tienen mayor altura que ancho)
         if (aspectRatio < 1) {
           document.write(
-            "<h1>El acceso desde dispositivos móviles no está permitido.</h1>"
+            "<h1>El acceso desde dispositivos móviles no está permitido5.</h1>"
           );
           return;
         }
 
-        // Si pasa todas las validaciones, redirigir al Google Forms
-        window.location.href =
-          "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdtQD_e6WO_NsctnFD0BBpk_4JeXVRE4ZcaaeIgHQGTkwWwDg/formResponse";
+        // Si pasa todas las validaciones, mostrar el iframe
+        document.getElementById("formulario").style.display = "block";
       }
 
       // Ejecutar la validación cuando la página se carga
       window.onload = validarDispositivo;
     </script>
+    <style>
+      #formulario {
+        display: none; /* Esconde el iframe inicialmente */
+        width: 640px;
+        height: 919px;
+        border: none;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <h1>Acceso al Formulario de Asistencia</h1>
+
+    <!-- Iframe que contiene el formulario de Google -->
+    <iframe
+      id="formulario"
+      src="https://docs.google.com/forms/d/e/1FAIpQLSdtQD_e6WO_NsctnFD0BBpk_4JeXVRE4ZcaaeIgHQGTkwWwDg/viewform?embedded=true"
+    >
+      Cargando…
+    </iframe>
+  </body>
 </html>
