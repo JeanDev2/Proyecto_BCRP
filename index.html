@@ -20,9 +20,7 @@
             userAgent
           )
         ) {
-          document.write(
-            "<h1>El acceso desde dispositivos móviles no está permitido1.</h1>"
-          );
+          document.write("<h1>ERROR: 1001</h1>");
           return;
         }
 
@@ -32,33 +30,19 @@
           platform.includes("android") ||
           platform.includes("ipad")
         ) {
-          document.write(
-            "<h1>El acceso desde dispositivos móviles no está permitido2.</h1>"
-          );
+          document.write("<h1>ERROR: 1002</h1>");
           return;
         }
 
         // Validación de resolución de pantalla (dispositivos móviles suelen tener resoluciones pequeñas)
         if (window.innerWidth < 900 || window.innerHeight < 600) {
-          document.write(
-            "<h1>El acceso desde dispositivos móviles no está permitido3.</h1>"
-          );
-          return;
-        }
-
-        // Validación de Touch (detecta si el dispositivo tiene pantalla táctil)
-        if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
-          document.write(
-            "<h1>El acceso desde dispositivos móviles no está permitido4.</h1>"
-          );
+          document.write("<h1>ERROR: 1003</h1>");
           return;
         }
 
         // Validación del ratio de aspecto (mayoría de móviles tienen mayor altura que ancho)
         if (aspectRatio < 1) {
-          document.write(
-            "<h1>El acceso desde dispositivos móviles no está permitido5.</h1>"
-          );
+          document.write("<h1>ERROR: 1004</h1>");
           return;
         }
 
@@ -73,19 +57,14 @@
       #formulario {
         display: none; /* Esconde el iframe inicialmente */
         width: 640px;
-        height: 919px;
+        height: 1000px;
         border: none;
+        margin: auto;
       }
     </style>
   </head>
   <body>
-    <h1>Acceso al Formulario de Asistencia</h1>
-
-    <!-- Iframe que contiene el formulario de Google -->
-    <iframe
-      id="formulario"
-      src="https://docs.google.com/forms/d/e/1FAIpQLSdtQD_e6WO_NsctnFD0BBpk_4JeXVRE4ZcaaeIgHQGTkwWwDg/viewform?embedded=true"
-    >
+    <iframe id="formulario" width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=CkbVXyW03kmb0PzSYnDTDD6q7QikcfBLtZkzbIbqJVxUQVRaVDVKSzlQVDJOQ0o5VElXRjlQMlo2Sy4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
       Cargando…
     </iframe>
   </body>
