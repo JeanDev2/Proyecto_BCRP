@@ -4,25 +4,68 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Control de acceso</title>
-  </head>
-  <body>
     <script>
-      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      function validarDispositivo() {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        var platform = navigator.platform.toLowerCase();
+        var aspectRatio = window.innerWidth / window.innerHeight;
 
-      if (
-        /android|avantgo|blackberry|iphone|ipad|ipod|palm|windows phone|xda|midp|mobile/i.test(
-          userAgent
-        )
-      ) {
-        // Dispositivo móvil detectado
-        document.write(
-          "<h1>El acceso desde dispositivos móviles no está permitido.</h1>"
-        );
-      } else {
-        // Dispositivo de escritorio detectado, redirigir al Google Forms
+        // Validación por User Agent (detecta dispositivos móviles)
+        if (
+          /android|avantgo|blackberry|iphone|ipad|ipod|palm|windows phone|xda|midp|mobile/i.test(
+            userAgent
+          )
+        ) {
+          document.write(
+            "<h1>El acceso desde dispositivos móviles no está permitido.</h1>"
+          );
+          return;
+        }
+
+        // Validación por plataforma (detecta iPhone, iPad, Android)
+        if (
+          platform.includes("iphone") ||
+          platform.includes("android") ||
+          platform.includes("ipad")
+        ) {
+          document.write(
+            "<h1>El acceso desde dispositivos móviles no está permitido.</h1>"
+          );
+          return;
+        }
+
+        // Validación de resolución de pantalla (dispositivos móviles suelen tener resoluciones pequeñas)
+        if (window.innerWidth < 1024 || window.innerHeight < 768) {
+          document.write(
+            "<h1>El acceso desde dispositivos móviles no está permitido.</h1>"
+          );
+          return;
+        }
+
+        // Validación de Touch (detecta si el dispositivo tiene pantalla táctil)
+        if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
+          document.write(
+            "<h1>El acceso desde dispositivos móviles no está permitido.</h1>"
+          );
+          return;
+        }
+
+        // Validación del ratio de aspecto (mayoría de móviles tienen mayor altura que ancho)
+        if (aspectRatio < 1) {
+          document.write(
+            "<h1>El acceso desde dispositivos móviles no está permitido.</h1>"
+          );
+          return;
+        }
+
+        // Si pasa todas las validaciones, redirigir al Google Forms
         window.location.href =
           "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdtQD_e6WO_NsctnFD0BBpk_4JeXVRE4ZcaaeIgHQGTkwWwDg/formResponse";
       }
+
+      // Ejecutar la validación cuando la página se carga
+      window.onload = validarDispositivo;
     </script>
-  </body>
+  </head>
+  <body></body>
 </html>
