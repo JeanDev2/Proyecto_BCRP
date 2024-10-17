@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control de acceso</title>
+  </head>
+  <body>
+    <script>
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      if (
+        /android|avantgo|blackberry|iphone|ipad|ipod|palm|windows phone|xda|midp|mobile/i.test(
+          userAgent
+        )
+      ) {
+        // Dispositivo móvil detectado
+        document.write(
+          "<h1>El acceso desde dispositivos móviles no está permitido.</h1>"
+        );
+      } else {
+        // Dispositivo de escritorio detectado, redirigir al Google Forms
+        window.location.href =
+          "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdtQD_e6WO_NsctnFD0BBpk_4JeXVRE4ZcaaeIgHQGTkwWwDg/formResponse";
+      }
+    </script>
+  </body>
+</html>
